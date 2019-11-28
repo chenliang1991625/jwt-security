@@ -10,9 +10,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 #mybatis
 mybatis:
-  # 指定全局配置文件位置,不用配置也行
+# 指定全局配置文件位置,不用配置也行
 #  config-location: classpath:mybatis/mybatis-config.xml
+#指定mapper.xml配置文件路径,放在resources路径下(不知道位置放到java目录下运行不起来)
   mapper-locations: classpath:mapper/*.xml
+#给包起别名,在UserMapping.xml配置文件中可以直接使用:<select id="selectUserById" resultType="com.example.me.jwtsecurity.pojo.User">可简写写成<select id="selectUserById" resultType="user">
   type-aliases-package: com.example.me.jwtsecurity.pojo
 
 

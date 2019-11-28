@@ -101,60 +101,52 @@
             </plugin>
         </plugins>
         <!--
-        放在这里的UserMapper.xml会被自动扫描到，但是有另外一个Maven带来的问题，就是java目录下的xml资源在项目打包时会被忽略掉，
-        所以，如果UserMapper.xml放在包下，需要在pom.xml文件中再添加如下配置，避免打包时java目录下的XML文件被自动忽略掉
-        原文链接：https://blog.csdn.net/u012702547/article/details/88643598
+        放在java(即src.main.java)目录下的UserMapper.xml会被自动扫描到，但是有另外一个Maven带来的问题，就是java目录下的xml资源在项目打包时会被忽略掉，
+        所以，如果UserMapper.xml放在包下，需要在pom.xml文件中再添加如下配置，避免打包时java目录下的XML文件被自动忽略掉;或者在启动类中加入@ImportResource(要加载的配置文件)注解
+      @ImportResource(locations = {"classpath: **/*.xml","classpath: **/*.yml","classpath: **/*.properties"}),两个都配上也能运行
+public class JwtSecurityApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(JwtSecurityApplication.class, args);
+    }
+
+}
+
         -->
-      <!--  <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>-->
-      <!--<resources>
+      <resources>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
+                    <include>**/*.yml</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
+          <!--配置了在java(即src.main.java)目录下加载配置文件，那么resources(即src.main.resources)下得配置就不能加载，所以还要加上下面的配置，这样配置java和resources目录中的配置文件都生效-->
           <resource>
               <directory>src/main/resources</directory>
               <includes>
+                  <include>**/*.properties</include>
+                  <include>**/*.xml</include>
                   <include>**/*.yml</include>
               </includes>
           </resource>
-        </resources>-->
-       <!-- <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.yml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
+        </resources>
+        <!--<resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
                 </includes>
             </resource>
             <resource>
                 <directory>${basedir}/src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
                 </includes>
             </resource>
         </resources>-->
