@@ -30,4 +30,10 @@ public class UserService {
 
         return userMapper.getUseByName(userName);
     }
+//根据用户名和加密后的密码查询
+    public User findByNameAndPwd(String userName, String passWord) {
+        User user=userMapper.findOneByNameAndPwd(userName,passWord);
+
+        return user;
+    }
 }

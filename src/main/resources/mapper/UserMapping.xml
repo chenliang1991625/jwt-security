@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.me.jwtsecurity.mapper.UserMapper"><!--命名空间要具体到接口类-->
-    <!--<resultMap id="BaseResultMap" type="User">
+    <!--把user表字段映射User类属性,得出返回结果-->
+    <resultMap id="userBaseResultMap" type="User">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="userName" jdbcType="VARCHAR" property="userName" />
         <result column="passWord" jdbcType="VARCHAR" property="passWord" />
         <result column="realName" jdbcType="VARCHAR" property="realName" />
-    </resultMap>-->
+    </resultMap>
     <select id="selectUserById" resultType="com.example.pojo.User">
         select * from user where id = #{id}
     </select>
@@ -19,4 +20,9 @@
 			#{realName,jdbcType=VARCHAR}
         )
     </insert>
+    <!--根据用户名和密码查询-->
+    <select id="findOneByNameAndPwd" resultMap="userBaseResultMap">
+         select * from user where userName = #{userName} and passWord = #{passWord}
+    </select>
+
 </mapper>

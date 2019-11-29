@@ -18,4 +18,5 @@ public interface UserMapper {
     @Select("select * from user where userName = #{userName} ")
     public List<User> getUseByName(String userName);
 
+    User findOneByNameAndPwd(String userName, String passWord);
 }
