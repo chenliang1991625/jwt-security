@@ -1,10 +1,12 @@
-package com.example.me.jwtsecurity.pojo;
-
+package com.example.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.io.Serializable;
 
 /**
  * @Author:wjup
@@ -15,9 +17,12 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class User {
+//@Component
+public class  User implements Serializable {
     private Integer id;
     private String userName;
     private String passWord;
     private String realName;
+
+
 }

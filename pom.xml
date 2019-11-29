@@ -21,9 +21,13 @@
 
     <dependencies>
         <!--加密 start-->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>-->
         <!--加密 end-->
         <!--web start-->
@@ -66,6 +70,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <!--pojo end-->
         <!--测试 start-->
@@ -91,6 +96,11 @@
             <artifactId>json-smart</artifactId>
             <version>2.2.1</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -112,7 +122,7 @@ public class JwtSecurityApplication {
 }
 
         -->
-      <resources>
+     <!-- <resources>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -122,7 +132,7 @@ public class JwtSecurityApplication {
                 </includes>
                 <filtering>false</filtering>
             </resource>
-          <!--配置了在java(即src.main.java)目录下加载配置文件，那么resources(即src.main.resources)下得配置就不能加载，所以还要加上下面的配置，这样配置java和resources目录中的配置文件都生效-->
+          &lt;!&ndash;配置了在java(即src.main.java)目录下加载配置文件，那么resources(即src.main.resources)下得配置就不能加载，所以还要加上下面的配置，这样配置java和resources目录中的配置文件都生效&ndash;&gt;
           <resource>
               <directory>src/main/resources</directory>
               <includes>
@@ -131,7 +141,7 @@ public class JwtSecurityApplication {
                   <include>**/*.yml</include>
               </includes>
           </resource>
-        </resources>
+        </resources>-->
         <!--<resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
