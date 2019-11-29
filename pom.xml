@@ -20,15 +20,17 @@
     </properties>
 
     <dependencies>
-        <!--加密 start-->
+        <!--JWT认证-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <!--spring-boot的认证和授权-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>-->
         <!--加密 end-->
         <!--web start-->
         <dependency>
@@ -96,11 +98,11 @@
             <artifactId>json-smart</artifactId>
             <version>2.2.1</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>
@@ -122,7 +124,7 @@ public class JwtSecurityApplication {
 }
 
         -->
-     <!-- <resources>
+      <resources>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -132,7 +134,7 @@ public class JwtSecurityApplication {
                 </includes>
                 <filtering>false</filtering>
             </resource>
-          &lt;!&ndash;配置了在java(即src.main.java)目录下加载配置文件，那么resources(即src.main.resources)下得配置就不能加载，所以还要加上下面的配置，这样配置java和resources目录中的配置文件都生效&ndash;&gt;
+          <!--配置了在java(即src.main.java)目录下加载配置文件，那么resources(即src.main.resources)下得配置就不能加载，所以还要加上下面的配置，这样配置java和resources目录中的配置文件都生效-->
           <resource>
               <directory>src/main/resources</directory>
               <includes>
@@ -141,7 +143,7 @@ public class JwtSecurityApplication {
                   <include>**/*.yml</include>
               </includes>
           </resource>
-        </resources>-->
+        </resources>
         <!--<resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.Serializable;
 
@@ -19,7 +18,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 //@Component
 public class  User implements Serializable {
-    private Integer id;
+    private Long id;
     private String userName;
     private String passWord;
     private String realName;

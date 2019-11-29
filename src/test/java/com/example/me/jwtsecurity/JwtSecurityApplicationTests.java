@@ -25,7 +25,7 @@ class JwtSecurityApplicationTests {
     void addUser(){
         int i=0;
         try {
-            userMapper.add(new User((int) idWorker.nextId(),"晨晨"+i++,bCryptPasswordEncoder.encode("123"),"chenchen"+i++));
+            userMapper.add(new User(idWorker.nextId(),"晨晨"+i++,bCryptPasswordEncoder.encode("123"),"chenchen"+i++));
             System.out.println("添加用户成功");
         } catch (Exception e) {
             System.out.println("failed");

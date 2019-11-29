@@ -32,9 +32,15 @@ public class JwtSecurityApplication {
     public BCryptPasswordEncoder encoding() {
         return new BCryptPasswordEncoder();
     }
+
     /*注入生成id的Bean*/
     @Bean
-    public IdWorker idWorker(){
+    public IdWorker idWorker() {
         return new IdWorker(1, 1);
     }
+ /*jwt认证工具注入*//*
+    @Bean
+    public JwtUtil jwtUtil() {
+        return new JwtUtil();
+    }*/
 }

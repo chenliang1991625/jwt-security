@@ -17,7 +17,7 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public User getSer(int id) {
+    public User getSer(Long id) {
         return userMapper.selectUserById(id);
     }
 
@@ -35,5 +35,9 @@ public class UserService {
         User user=userMapper.findOneByNameAndPwd(userName,passWord);
 
         return user;
+    }
+
+    public void deleteById(Long id) {
+        userMapper.removeById(id);
     }
 }

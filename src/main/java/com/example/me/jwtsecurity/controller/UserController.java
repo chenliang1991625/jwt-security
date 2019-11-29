@@ -3,10 +3,12 @@ package com.example.me.jwtsecurity.controller;
 import com.example.me.jwtsecurity.service.UserService;
 import com.example.me.jwtsecurity.utils.IdWorker;
 import com.example.pojo.User;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -25,8 +27,10 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private IdWorker idWorker;
+    @Autowired
+    private HttpServletRequest request;
     @RequestMapping("get/{id}")
-    public User GetUser(@PathVariable int id) {
+    public User GetUser(@PathVariable Long id) {
 //        SecurityProperties.User user = new SecurityProperties.User();
         User user = userService.getSer(id);
         return user;
@@ -46,17 +50,29 @@ public class UserController {
 //        boolean matchesStata = encoding.matches(user.getPassWord(), sqlUser.getPassWord());
       }*/
 
-//    根据登陆名和密码查询
+    //    根据登陆名和密码查询
     @RequestMapping("getUser/{userName}/{passWord}")
     public User GetUserByName(@PathVariable String userName, @PathVariable String passWord) {
         List<User> userList = userService.getUser(userName);
 //        String encode = bCryptPasswordEncoder.encode("123");
 //        System.out.println(encode);
         for (User user : userList) {
-            if (user!=null && bCryptPasswordEncoder.matches(passWord,user.getPassWord())){
+            if (user != null && bCryptPasswordEncoder.matches(passWord, user.getPassWord())) {
                 return user;
             }
         }
         return null;
+    }
+
+    /*** 删除 * @param id
+     * @param id*/
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable Long id) {
+        Claims claims = (Claims) request.getAttribute("admin_claims");//判断是管理员才可删除
+        if (claims == null) {
+            return "error";
+        }
+        userService.deleteById(id);
+        return "index";
     }
 }

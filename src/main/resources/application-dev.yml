@@ -34,3 +34,7 @@ logging:
     com:
       example:
         mapper : debug
+jwt:
+  config:
+    ttl: 360000
+    key: chenliang
