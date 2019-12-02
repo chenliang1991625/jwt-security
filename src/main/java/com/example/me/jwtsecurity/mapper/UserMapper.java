@@ -12,15 +12,15 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    User selectUserById(Long id);
+    User selectUserById(Long uid);
 
     public void add(User user);
 
-    @Select("select * from user where userName = #{userName} ")
+    @Select("select * from user where username = #{username} ")
     public List<User> getUseByName(String userName);
 
-    User findOneByNameAndPwd(String userName, String passWord);
+    User findOneByNameAndPwd(String username, String password);
 
-    @Delete("delete from user where id = #{id}")
-    void removeById(Long id);
+    @Delete("delete from user where uid = #{uid}")
+    void removeById(Long uid);
 }

@@ -22,17 +22,16 @@ public class LoginController {
     @Autowired
     JwtUtil jwtUtil;
     /*** 用户登陆生成认证token * @param userName * @param passWord * @return */
-    @RequestMapping(value = "/login/{userName}/{passWord}", method = RequestMethod.GET)//如果用浏览器请求测试要改为get测试再改回来
+    @RequestMapping(value = "/login/{userName}/{passWord}", method = RequestMethod.POST/*,produces = { "application/json;charset=UTF-8"}*/)//如果用浏览器请求测试要改为get测试再改回来
     public String login(@PathVariable String userName, @PathVariable String passWord,Map map) {
 
         List<User> userList = userService.getUser(userName);
         for (User user : userList) {
-            if (user != null && bCryptPasswordEncoder.matches(passWord, user.getPassWord())) {
-                String token = jwtUtil.createJWT(user.getId(), user.getUserName(), "user");
+            if (user != null && bCryptPasswordEncoder.matches(passWord, user.getPassword())) {
+                String token = jwtUtil.createJWT(user.getUid(), user.getUsername(), "user");
                 System.out.println("登录   Authorization=Bearer "+token);
                 map.put("token", token);
-                map.put("userName", user.getUserName());
-                map.put("realName", user.getRealName());
+                map.put("userName", user.getUsername());
                 return "login";
             }
             }

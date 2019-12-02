@@ -35,15 +35,19 @@ public class UserController {
         User user = userService.getSer(id);
         return user;
     }
-//      添加方法不成功，不知道为什么
+    /* 查询等其它方法都成功,添加方法不成功，不知道为什么，后面再b站上:https://www.bilibili.com/video/av74851468?p=14看了srping securty的认证流程分析
+    才明白,srping securty默认用自己内置的UserDetails（User)类,而不用我们自己创建的User类对应的数据库中的表中的数据;如果要实现用我们
+    自己的表需要加代码完成（Service 继承UserDetailsService重写loadUserByUsername方法可实现）!但是我这样做了还是不行，我看的是spring security二不是springboot security
+    ，那再找springboot security的课程来学学呗(可以吧springboot security自带的登录页面改成自己的，也有可能是springboot版本的问题,解决了:把它复制到下面运行就可以(why？))
+    */
      /* @Autowired
       @RequestMapping(value = "add",method = RequestMethod.POST)
       public void add(@RequestBody User user) {
         //加密
         if (user!=null){
-            user.setId((int) idWorker.nextId());//id用id生成器生成，数据库中的id就不要设置成自增
-            String sqlpassWord = bCryptPasswordEncoder.encode(user.getPassWord());//加密后的密码
-                  user.setPassWord(sqlpassWord);
+            user.setUid(idWorker.nextId());//id用id生成器生成，数据库中的id就不要设置成自增
+            String sqlpassWord = bCryptPasswordEncoder.encode(user.getPassword());//加密后的密码
+                  user.setPassword(sqlpassWord);
             userService.save(user);
         }
 //        验证:登录安全校验时再用呗
@@ -57,7 +61,7 @@ public class UserController {
 //        String encode = bCryptPasswordEncoder.encode("123");
 //        System.out.println(encode);
         for (User user : userList) {
-            if (user != null && bCryptPasswordEncoder.matches(passWord, user.getPassWord())) {
+            if (user != null && bCryptPasswordEncoder.matches(passWord, user.getPassword())) {
                 return user;
             }
         }
@@ -74,5 +78,15 @@ public class UserController {
         }
         userService.deleteById(id);
         return "index";
+    }
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public void add(@RequestBody User user) {
+        //加密
+        if (user != null) {
+            user.setUid(idWorker.nextId());//id用id生成器生成，数据库中的id就不要设置成自增
+            String sqlpassWord = bCryptPasswordEncoder.encode(user.getPassword());//加密后的密码
+            user.setPassword(sqlpassWord);
+            userService.save(user);
+        }
     }
 }

@@ -17,10 +17,11 @@ mybatis:
 #给包起别名,在UserMapping.xml配置文件中可以直接使用:<select id="selectUserById" resultType="com.example.me.jwtsecurity.pojo.User">可简写写成<select id="selectUserById" resultType="user">
   type-aliases-package: com.example.pojo
   # spring.security.user
+  #用户名和密码直接在配置文件中配置,也可用写入数据库的方式，这样的话这里就不用了配置了
   security:
     user:
       name: 陈亮
-      password: $2a$10$MNuMiZgNMq82GNdBp29ZDulPEL8YfIrjezSQWYgJw8YDuIsfVb78S
+      password: 123
 #    如果不想一开始就使能Spring Security，可以在配置文件中做如下的配置：
     basic:
       enabled: false

@@ -3,26 +3,24 @@
 <mapper namespace="com.example.me.jwtsecurity.mapper.UserMapper"><!--命名空间要具体到接口类-->
     <!--把user表字段映射User类属性,得出返回结果-->
     <resultMap id="userBaseResultMap" type="User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="userName" jdbcType="VARCHAR" property="userName" />
-        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
-        <result column="realName" jdbcType="VARCHAR" property="realName" />
+        <result column="uid" jdbcType="INTEGER" property="uid" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
     </resultMap>
     <select id="selectUserById" resultType="com.example.pojo.User">
-        select * from user where id = #{id}
+        select * from user where uid = #{uid}
     </select>
     <!--插入一条数据-->
     <insert id="add" >
-        insert into user(id,userName,passWord,realName) values (
-            #{id,jdbcType=INTEGER},
-			#{userName,jdbcType=VARCHAR},
-			#{passWord,jdbcType=VARCHAR},
-			#{realName,jdbcType=VARCHAR}
+        insert into user(uid,userName,password) values (
+            #{uid,jdbcType=INTEGER},
+			#{username,jdbcType=VARCHAR},
+			#{password,jdbcType=VARCHAR}
         )
     </insert>
     <!--根据用户名和密码查询-->
     <select id="findOneByNameAndPwd" resultMap="userBaseResultMap">
-         select * from user where userName = #{userName} and passWord = #{passWord}
+         select * from user where username = #{username} and password = #{password}
     </select>
 
 </mapper>
